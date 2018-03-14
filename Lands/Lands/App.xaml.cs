@@ -19,6 +19,12 @@
             get;
             internal set;
         }
+
+        public static MasterPage Master 
+        {   
+            get; 
+            internal set; 
+        }
         #endregion
 
         #region Constructors

@@ -302,5 +302,15 @@
         {
             get { return Resource.FromCamera; }
         }
+
+        public static string Save
+        {
+            get { return Resource.Save; }
+        }
+
+        public static string ChangePassword
+        {
+            get { return Resource.ChangePassword; }
+        }
     }
 }

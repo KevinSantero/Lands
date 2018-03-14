@@ -324,4 +324,10 @@
   <data name="FromCamera" xml:space="preserve">
     <value>From camera</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
 </root>

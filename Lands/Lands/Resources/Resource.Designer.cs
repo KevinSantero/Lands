@@ -460,5 +460,17 @@ namespace Lands.Resources {
                 return ResourceManager.GetString("FromCamera", resourceCulture);
             }
         }
+        
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        public static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
     }
 }
