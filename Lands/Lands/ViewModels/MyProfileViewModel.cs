@@ -1,9 +1,11 @@
 ﻿namespace Lands.ViewModels
 {
+    using System;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using Lands.Helpers;
     using Models;
+    using Domain;
     using Plugin.Media;
     using Plugin.Media.Abstractions;
     using Services;
@@ -52,6 +54,7 @@
         public MyProfileViewModel()
         {
             this.User = MainViewModel.GetInstance().User;
+            this.apiService = new ApiService();
             this.ImageSource = this.User.ImageFullPath;
             this.IsEnabled = true;
         }
@@ -134,6 +137,8 @@
                 imageArray = FilesHelper.ReadFully(this.file.GetStream());
             }
 
+            var userDomain = this.ToUserDomain(this.User, imageArray);
+
             var mainViewModel = MainViewModel.GetInstance();
             var apiSecurity = Application.Current.Resources["APISecurity"].ToString();
             var response = await this.apiService.Put(
@@ -142,7 +147,7 @@
                 "/Users", 
                 mainViewModel.TokenType, 
                 mainViewModel.Token,
-                this.User);
+                userDomain);
 
             if (!response.IsSuccess)
             {
@@ -163,6 +168,21 @@
                 Languages.UserRegisteredMessage,
                 Languages.Accept);
             await Application.Current.MainPage.Navigation.PopAsync();
+        }
+
+        private User ToUserDomain(UserLocal user, byte[] imageArray)
+        {
+            return new User
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                ImageArray = imageArray,
+                ImagePath = user.ImagePath,
+                LastName = user.LastName,
+                Telephone = user.Telephone,
+                UserId = user.UserId,
+                UserTypeId = user.UserTypeId,
+            };
         }
 
         public ICommand ChangeImageCommand
